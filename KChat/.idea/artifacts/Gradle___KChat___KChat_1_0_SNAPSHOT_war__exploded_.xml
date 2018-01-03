@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" external-system-id="GRADLE" name="Gradle : KChat : KChat-1.0-SNAPSHOT.war (exploded)">
+  <artifact type="exploded-war" name="Gradle : KChat : KChat-1.0-SNAPSHOT.war (exploded)">
     <output-path>$PROJECT_DIR$/build/libs/exploded/KChat-1.0-SNAPSHOT.war</output-path>
     <properties id="gradle-properties">
       <options external-project-path="$PROJECT_DIR$">
