@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import java.util.List;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by kira on 2018/1/3/003.
  */
@@ -61,7 +63,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected void initWidget()
     {
-
+        ButterKnife.bind(this);
     }
 
     @Override
