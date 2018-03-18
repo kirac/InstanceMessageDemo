@@ -61,6 +61,21 @@ public abstract class RecylerAdapter<Data> extends RecyclerView.Adapter<RecylerA
         return holder;
     }
 
+    @Override
+    public void update(Data data, ViewHolder<Data> holder) {
+        //得到当前ViewHolder的坐标
+        int position = holder.getAdapterPosition();
+        if (position>=0)
+        {
+            //进行数据的移除与更新
+            mList.remove(position);
+            mList.add(position,data);
+            //通知这个坐标下的数据有更新
+            notifyItemChanged(position);
+
+        }
+    }
+
     /**
      * 得到一个新的ViewHolder
      * @param view 根布局
@@ -241,4 +256,5 @@ public abstract class RecylerAdapter<Data> extends RecyclerView.Adapter<RecylerA
             }
         }
     }
+
 }

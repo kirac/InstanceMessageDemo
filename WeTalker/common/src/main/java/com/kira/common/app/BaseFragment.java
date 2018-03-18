@@ -34,7 +34,7 @@ public abstract class BaseFragment extends Fragment {
             int layoutId = getLayoutId();
             View rootView = inflater.inflate(layoutId, container, false);
             initWidget(rootView);
-            rootView=mRootView;
+            mRootView=rootView;
         }else
         {
             if (mRootView.getParent()!=null)
