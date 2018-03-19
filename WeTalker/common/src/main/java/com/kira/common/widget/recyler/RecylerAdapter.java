@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.kira.common.R;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -21,16 +22,16 @@ import butterknife.Unbinder;
 
 public abstract class RecylerAdapter<Data> extends RecyclerView.Adapter<RecylerAdapter.ViewHolder>
         implements View.OnClickListener, View.OnLongClickListener,IAdapterCallBack<Data> {
-    private final List<Data> mList;
+    private  List<Data> mList;
     private IAdapterListener<Data> mListener;
 
     public RecylerAdapter()
     {
         this(null);
     }
-    public  RecylerAdapter(List<Data> list)
+    public  RecylerAdapter(IAdapterListener<Data> listener)
     {
-        this(list,null);
+        this(new ArrayList<Data>(),listener);
     }
     public RecylerAdapter(List<Data> list,IAdapterListener<Data> listener)
     {

@@ -1,20 +1,21 @@
 package com.kira.common.widget.view;
 
-import android.app.LoaderManager;
+
 import android.content.Context;
-import android.content.CursorLoader;
-import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.FileObserver;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -34,7 +35,7 @@ public class GalleyView extends RecyclerView {
     private static final int LOADER_ID=0x0100;
     private static final int MAX_IMAGE_COUNT = 3;
     private static final long MIN_IMAGE_FILE_LENGTH = 10 * 1024;
-    private Adapter mAdapter;
+    private Adapter mAdapter=new Adapter();
     private LoaderCallBack mLoaderCallBack=new LoaderCallBack();
     private List<Image> mSelectedImages=new LinkedList<>();
     private SelectedChangeListener mSelectedChangeListener;
@@ -82,7 +83,7 @@ public class GalleyView extends RecyclerView {
      * @param listener CELL状态改变监听者
      * @return 任何一个LOADER_ID,可用于销毁Loader
      */
-    public int setUp(LoaderManager loaderManager,SelectedChangeListener listener)
+    public int setUp(LoaderManager loaderManager, SelectedChangeListener listener)
     {
         this.mSelectedChangeListener=listener;
         loaderManager.initLoader(LOADER_ID,null,mLoaderCallBack);
@@ -173,12 +174,12 @@ public class GalleyView extends RecyclerView {
                         image.id=id;
                         image.path=path;
                         image.date=dateTime;
-                        mSelectedImages.add(image);
+                        images.add(image);
                     }while (cursor.moveToNext());
 
                 }
             }
-            updateSource(mSelectedImages);
+            updateSource(images);
 
         }
 
@@ -215,6 +216,10 @@ public class GalleyView extends RecyclerView {
         }else{
             if (mSelectedImages.size()>=MAX_IMAGE_COUNT)
             {
+                String str=getResources().getString(R.string.label_gallery_select_max_size);
+                str = String.format(str, MAX_IMAGE_COUNT);
+                Toast.makeText(getContext(),str, Toast.LENGTH_SHORT).show();
+
                 isRefresh=false;
             }else{
                 mSelectedImages.add(image);
@@ -256,7 +261,7 @@ public class GalleyView extends RecyclerView {
         int id; //数据ID
         String path; //图片的路径
         long date; //图片的创建日期
-        boolean isSelect //图片是否选中
+        boolean isSelect; //图片是否选中
 
         @Override
         public boolean equals(Object o) {
@@ -273,7 +278,7 @@ public class GalleyView extends RecyclerView {
             return path != null ? path.hashCode() : 0;
         }
     }
-    private static class Adapter extends RecylerAdapter<Image>
+    private  class Adapter extends RecylerAdapter<Image>
     {
 
 
@@ -296,9 +301,9 @@ public class GalleyView extends RecyclerView {
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mPic = (ImageView) findViewById(R.id.im_image);
-            mShade = findViewById(R.id.view_shade);
-            mSelected = (CheckBox) findViewById(R.id.cb_select);
+            mPic = (ImageView) itemView.findViewById(R.id.im_image);
+            mShade = itemView.findViewById(R.id.view_shade);
+            mSelected = (CheckBox)itemView. findViewById(R.id.cb_select);
 
         }
 
@@ -308,10 +313,11 @@ public class GalleyView extends RecyclerView {
                     .load(image.path) //加载路径
                     .diskCacheStrategy(DiskCacheStrategy.NONE) //因为加载的不是网络图片,所以不使用缓存,直接从原图加载
                     .centerCrop() //居中剪切
-                    .placeholder(R.color.green_200) //默认图片
+                    .placeholder(R.color.grey_200) //默认图片
                     .into(mPic);
             mShade.setVisibility(image.isSelect?VISIBLE:INVISIBLE);
             mSelected.setChecked(image.isSelect);
+            mSelected.setVisibility(VISIBLE);
         }
     }
 }

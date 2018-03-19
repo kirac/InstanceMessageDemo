@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.kira.wetalker.frags.main.ActiveFragment">
-    <TextView
-        android:gravity="center"
+    <com.kira.common.widget.view.GalleyView
+        android:id="@+id/galleryview"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textColor="@color/red_500"
-        android:text="Active" />
+        android:padding="1dp" />
 
 </FrameLayout>
