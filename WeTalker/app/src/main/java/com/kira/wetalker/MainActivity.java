@@ -15,6 +15,7 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.kira.common.app.BaseActivity;
 import com.kira.common.widget.view.PortraitView;
+import com.kira.wetalker.activities.AccountActivity;
 import com.kira.wetalker.frags.main.ActiveFragment;
 import com.kira.wetalker.frags.main.ContactFragment;
 import com.kira.wetalker.frags.main.GroupFragment;
@@ -89,7 +90,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     @OnClick(R.id.btn_action)
     public void onActionButtonClick()
     {
-
+        AccountActivity.show(this);
     }
 
     @Override
