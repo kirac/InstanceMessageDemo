@@ -1,5 +1,7 @@
 package com.kira.wetalker;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.Menu;
@@ -49,7 +51,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     protected int getLayoutId() {
         return R.layout.activity_main;
     }
-
+    /**
+     * MainActivity 显示的入口
+     *
+     * @param context 上下文
+     */
+    public static void show(Context context) {
+        context.startActivity(new Intent(context, MainActivity.class));
+    }
     @Override
     protected void initData() {
         super.initData();
@@ -81,6 +90,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                         this.view.setBackground(resource.getCurrent());
                     }
                 });
+
     }
     @OnClick(R.id.im_search)
     public void onSearchMenuClick()

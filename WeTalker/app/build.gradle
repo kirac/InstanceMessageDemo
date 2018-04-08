@@ -30,10 +30,12 @@ dependencies {
     compile "com.jakewharton:butterknife:$rootProject.ext.butterKnifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterKnifeVersion"
     compile "com.github.yalantis:ucrop:$rootProject.ext.uCropVersion"
+    compile "pub.devrel:easypermissions:$rootProject.ext.easyPMVersion"
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    implementation project(':common')
     implementation project(':lang')
+    implementation project(':factory')
+    implementation project(':common')
 }

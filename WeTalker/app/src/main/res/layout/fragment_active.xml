@@ -3,11 +3,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.kira.wetalker.frags.main.ActiveFragment">
-    <com.kira.common.widget.view.GalleyView
-        android:id="@+id/galleryview"
-
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="1dp" />
 
 </FrameLayout>
